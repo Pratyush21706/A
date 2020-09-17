@@ -1,10 +1,12 @@
-localStorage.speed  =1;
+localStorage.speed=2;
+var time;
 var food,water,sleep,run,qot,nm,img = localStorage.image;
+var now,end; 
 localStorage.name;
 localStorage.age;
 var talkbox;
 var rand;
-var a = 2,b=1,s = 1,x = 1;
+var a = 1,b=1,s = 1,x = 1;
 localStorage.water, localStorage.calories,localStorage.sleep;
  localStorage.sleep_goal ,localStorage.water_goal ,localStorage.calories_goal ;
             var count =1,karna = 1,h =900;
@@ -28,13 +30,26 @@ frame = loadImage("border.png")
 }
 function setup(){
           createCanvas(windowWidth/1.01, windowHeight);
+    
+    //Firebase Stuff
+    var firebaseConfig = {
+   apiKey: "AIzaSyBMdyADowFNLi-mVDm91NYnBKSem_peveg",
+    authDomain: "ambience-database.firebaseapp.com",
+    databaseURL: "https://ambience-database.firebaseio.com",
+    projectId: "ambience-database",
+    storageBucket: "ambience-database.appspot.com",
+    messagingSenderId: "953268091712",
+    appId: "1:953268091712:web:806a6e5cf4181b5159d8a5"
+  };
+  firebase.initializeApp(firebaseConfig);
+  console.log(firebase);
+  
+ database = firebase.database();
+ //Firebase Ends Here   
+    
     nm = window.innerHeight/17
 col = color(255,255,255,0)
-    input = createFileInput(handleFile);
-  input.position(width/20,-555);
-     input.style(`font-size`,`3px`)
-//    input.hide();
-    input.style(`background`,`transparent`);
+    
     nextButton = createButton(`→`)
     nextButton.position(width/2.1,-555)
     nextButton.style(`background`,`transparent`);
@@ -44,7 +59,7 @@ col = color(255,255,255,0)
     
    input1 = createInput(``).attribute(`placeholder`,`Username`)
     input1.position(width/4,-555);
-    input1.style(`font-size`,`20px`)
+    input1.style(`font-size`,`25px`)
         input1.style(`border`,`200px`)
 //    input1.style(`bottom border`,`20px solid col1`)
 //        input1.style(`padding`,`5px`)
@@ -53,7 +68,7 @@ col = color(255,255,255,0)
     
     input2 = createInput(``).attribute(`placeholder`,`Age`)
     input2.position(width/4,-555);
-    input2.style(`font-size`,`20px`)
+    input2.style(`font-size`,`25px`)
         input2.style(`border`,`200px`)
 //    input1.style(`bottom border`,`20px solid col1`)
 //        input2.style(`padding`,`15px`)
@@ -189,7 +204,7 @@ see.style(`background-color`,`rgba(255, 255, 255, 0.7)`);
         see.style(`padding-right`,`480px`)
     
      sum = createButton(`+`)
-    
+    sum.position(2,-5555)
     sum.style(`font-size`,`20px`)
     sum.mousePressed(waterUpdate)
     sum.style(`color`,`white`)
@@ -205,16 +220,39 @@ sum.style(`outline`,`0px`)
     backButton.style(`border`,`0px`)
     backButton.mousePressed(back)
 
-//see.style(`padding`,`240px`)
+
                 see.style(`outline`,`0px`)
     nextButton.mousePressed(next)
-//    loadJSON("https://favqs.com/api/qotd",loaded)
-  
+
+  start = createButton(`Begin sleep`)
+    start.position(width/1.9,-555);
+    start.mousePressed(start_sleep)
+       start.style(`background-color`,`#4aa4e8`);
+     start.style(`border-radius`, `5px`)
+    start.style(`font-size`,`14px`)
+    start.style(`border`,`0px`)
+    start.style(`color`,`white`)
+    
+    end = createButton(`End sleep`)
+    end.position(width/1.9,-555);
+       end.style(`background-color`,`#4aa4e8`);
+     end.style(`border-radius`, `5px`)
+    end.style(`font-size`,`14px`)
+    end.style(`border`,`0px`)
+    end.style(`color`,`white`)
+    
 }
-//function loaded(data){
-//    quotes = data;
-//    console.log(quotes)
-//}
+
+start_sleep = function(){
+    now = hour();
+    min = minute();
+    sec = second();
+time =   now+":"+min+":"+sec
+}
+
+end_sleep = function(){
+    
+}
 
 waterUpdate = function(){
     localStorage.water++
@@ -228,6 +266,27 @@ function bring(){
 function registerd(){
   localStorage.name = input1.value();
     localStorage.age = input2.value();
+    name = input1.value();
+    age = input2.value();
+     hr = hour();
+    mn = minute();
+    sc = second();
+       dy = day();
+    mt = month();
+    yr = year();
+year =   dy+"-"+mt+"-"+yr
+time =   hr+":"+mn+":"+sc
+    console.log(time)
+    
+      var data ={
+          TIME :time,
+    NAME : name,
+           AGE :age,
+          DATE : year
+  }
+  database.ref(name).push(data,finished);
+  console.log("send called");
+    
     console.log("Name: "+localStorage.name)
         console.log("Age: "+localStorage.age)
     localStorage.speed = 34;
@@ -235,6 +294,14 @@ function registerd(){
  input2.position(width/4,-555);
  registerButton.position(width/2.1,-555)
 //     alert(`You Have Registerd Successfully`)                     
+}
+
+function finished(error) {
+  if (error) {
+   alert(`Plz check your internet connection`)
+  } else {
+           alert(`You Have Registerd Successfully`)                     
+  }
 }
 function next(){
     a = 2;
@@ -277,7 +344,7 @@ function draw(){
  if(localStorage.speed==1){
      if(a===1){
          
-    fill("col1")
+    fill("black")
           image(smile,width/11,height/8,width/1.1,height/3)
     textSize(60)
      textStyle("bold")
@@ -308,13 +375,13 @@ rect(width/8,height/1.82,width/1.3,1)
           image(logo,width/5,8,width/1.6,height/2)
           image(user,width/7,height/2.1,width/16,height/16,20)
                    image(age,width/7,height/1.7,width/16,height/16)
-             registerButton.position(width/8,height/1.3)
+             registerButton.position(width/12,height/1.4)
 
      }
 }
     if(localStorage.speed==34){
     if(deviceOrientation ==="landscape"){
-        alert("rotate your device")
+//        alert("rotate your device")
     }
 
         if(window.innerWidth>550){
@@ -352,6 +419,9 @@ Reports.position(width/1.91,height/1.4)
 
         }else{
                      resizeCanvas(window.innerWidth,window.innerHeight*1.1)
+    start.position(width/1.9,height/1.384);
+    end.position(width/1.9,height/1.384);
+                                        sum.position(width/25,height/2.51)
 
             background(dark)
              fill("white")
@@ -368,13 +438,6 @@ fill("#BB86FC")
             text(localStorage.water,width/5.65,height/2.9)
                             text(localStorage.calories,width/5.65,height/1.5)
                 text(localStorage.sleep,width/1.48,height/1.5)
-                            sum.position(width/25,height/2.51)
-if(x = 1){
-          input.position(width/20, height/22);
-}      else{
-           input.position(width/20,-555);
-
-}      
 //   noFill();
 //        stroke("gray")
 //        strokeWeight(0.05)
@@ -533,14 +596,4 @@ function desktop()
 
 function back(){
     localStorage.speed=34;
-}
-function handleFile(file) {
-  print(file);
-    x = 2
-  if (file.type === 'image') {
-    img = createImg(file.data, '');
-    img.hide();
-  } else {
-    img = null;
-  }
 }
