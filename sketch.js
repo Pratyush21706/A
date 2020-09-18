@@ -18,9 +18,6 @@ var col1="black",col2 = "col1";
 var nameInput;
 function preload(){
   smile =loadImage("intro.png")
-    logo = loadImage("icon.png")
-    user = loadImage("user.jpg")
-        age = loadImage("age.jpg")
             bot = loadImage("bot.png")
 dk = loadImage("desktop.png")
 frame = loadImage("border.png")
