@@ -1,4 +1,5 @@
-localStorage.speed=2;
+localStorage.speed=1;
+var uN,Up;
 var time;
 var food,water,sleep,run,qot,nm,img = localStorage.image;
 var now,end; 
@@ -17,7 +18,7 @@ var col1="black",col2 = "col1";
 var nameInput;
 function preload(){
   smile =loadImage("intro.png")
-    logo = loadImage("logo.jpg")
+    logo = loadImage("icon.png")
     user = loadImage("user.jpg")
         age = loadImage("age.jpg")
             bot = loadImage("bot.png")
@@ -57,23 +58,96 @@ col = color(255,255,255,0)
     nextButton.style(`border`,`0px`)
     nextButton.mousePressed(next)
     
-   input1 = createInput(``).attribute(`placeholder`,`Username`)
+   input1 = createInput(``)
     input1.position(width/4,-555);
+        input1.style(`background`,`transparent`)
+
     input1.style(`font-size`,`25px`)
-        input1.style(`border`,`200px`)
-//    input1.style(`bottom border`,`20px solid col1`)
-//        input1.style(`padding`,`5px`)
+  input1.style(`border-top-style`,`hidden`)
+    input1.style(`border-bottom-style`,`groove`)
+    input1.style(`border-right-style`,`hidden`)
+    input1.style(`border-left-style`,`hidden`)
+            input1.style(`padding-right`,`40px`)
+
                 input1.style(`outline`,`0px`)
+                input1.style(`color`,`white`)
 
     
-    input2 = createInput(``).attribute(`placeholder`,`Age`)
+    input2 = createInput(``,`password`)
     input2.position(width/4,-555);
     input2.style(`font-size`,`25px`)
-        input2.style(`border`,`200px`)
+    input2.style(`background`,`transparent`)
+        input2.style(`border-top-style`,`hidden`)
+    input2.style(`border-bottom-style`,`groove`)
+    input2.style(`border-right-style`,`hidden`)
+    input2.style(`border-left-style`,`hidden`)
 //    input1.style(`bottom border`,`20px solid col1`)
-//        input2.style(`padding`,`15px`)
+        input2.style(`padding-right`,`40px`)
             input2.style(`outline`,`0px`)
+                input2.style(`color`,`white`)
 
+    input3 = createInput(``)
+    input3.position(width/4,-555);
+    input3.style(`font-size`,`25px`)
+    input3.style(`background`,`transparent`)
+    input3.style(`border-top-style`,`hidden`)
+    input3.style(`border-bottom-style`,`groove`)
+    input3.style(`border-right-style`,`hidden`)
+    input3.style(`border-left-style`,`hidden`)
+    input3.style(`padding-right`,`40px`)
+    input3.style(`outline`,`0px`)
+    input3.style(`color`,`white`)
+    
+    input4 = createInput(``)
+    input4.position(width/4,-555);
+    input4.style(`font-size`,`25px`)
+    input4.style(`background`,`transparent`)
+    input4.style(`border-top-style`,`hidden`)
+    input4.style(`border-bottom-style`,`groove`)
+    input4.style(`border-right-style`,`hidden`)
+    input4.style(`border-left-style`,`hidden`)
+    input4.style(`padding-right`,`40px`)
+    input4.style(`outline`,`0px`)
+    input4.style(`color`,`white`)
+    
+    input5 = createInput(``,`number`)
+    input5.position(width/4,-555);
+    input5.style(`font-size`,`25px`)
+    input5.style(`background`,`transparent`)
+    input5.style(`border-top-style`,`hidden`)
+    input5.style(`border-bottom-style`,`groove`)
+    input5.style(`border-right-style`,`hidden`)
+    input5.style(`border-left-style`,`hidden`)
+    input5.style(`padding-right`,`40px`)
+    input5.style(`outline`,`0px`)
+    input5.style(`color`,`white`)
+    
+    input6 = createInput(``,`password`)
+    input6.position(width/4,-555);
+    input6.style(`font-size`,`25px`)
+    input6.style(`background`,`transparent`)
+    input6.style(`border-top-style`,`hidden`)
+    input6.style(`border-bottom-style`,`groove`)
+    input6.style(`border-right-style`,`hidden`)
+    input6.style(`border-left-style`,`hidden`)
+    input6.style(`padding-right`,`40px`)
+    input6.style(`outline`,`0px`)
+    input6.style(`color`,`white`)
+   
+    
+     input7 = createInput(``,`password`)
+    input7.position(width/4,-555);
+    input7.style(`font-size`,`25px`)
+    input7.style(`background`,`transparent`)
+    input7.style(`border-top-style`,`hidden`)
+    input7.style(`border-bottom-style`,`groove`)
+    input7.style(`border-right-style`,`hidden`)
+    input7.style(`border-left-style`,`hidden`)
+    input7.style(`padding-right`,`40px`)
+    input7.style(`outline`,`0px`)
+    input7.style(`color`,`white`)
+    
+    
     
 radio = createRadio();
     radio.option(`Male`,`Male`)
@@ -81,20 +155,34 @@ radio = createRadio();
     radio.style('width', '800px');
     radio.position(200,-555)
 
-    registerButton = createButton(`Register`)
+    registerButton = createButton(`Log In`)
     registerButton.position(width/2.1,-555)
-    registerButton.style(`background-color`,`#27cf3b`);
+    registerButton.style(`background-color`,`#5D9DFF`);
     registerButton.style(`font-size`,`35px`)
     registerButton.style(`border`,`0px`)
         registerButton.style(`color`,`white`)
         registerButton.style(`padding-left`,`100px`)
             registerButton.style(`padding-right`,`100px`)
-                registerButton.style(`padding-top`,`15px`)
-                    registerButton.style(`padding-bottom`,`15px`)
-                        registerButton.style(`border-radius`,`10px`)
-                         registerButton.style(`box-shadow`,`0px 15px 20px rgba(46, 229, 157, 0.9)`)
-    registerButton.mousePressed(registerd)
+                registerButton.style(`padding-top`,`5px`)
+                    registerButton.style(`padding-bottom`,`5px`)
+                        registerButton.style(`border-radius`,`6px`)
+                         registerButton.style(`box-shadow`,`0px 5px 10px rgba(93, 157, 255, 0.05)`)
+        registerButton.mousePressed(login)
+
     
+      success = createButton(`Register`)
+    success.position(width/2.1,-555)
+    success.style(`background-color`,`#5D9DFF`);
+    success.style(`font-size`,`35px`)
+    success.style(`border`,`0px`)
+        success.style(`color`,`white`)
+        success.style(`padding-left`,`100px`)
+            success.style(`padding-right`,`100px`)
+                success.style(`padding-top`,`5px`)
+                    success.style(`padding-bottom`,`5px`)
+                        success.style(`border-radius`,`6px`)
+                         success.style(`box-shadow`,`0px 5px 10px rgba(93, 157, 255, 0.05)`)
+                            success.mousePressed(send)
 //let am = window.innerWidth+"px";
 //    console.log(am)
    Health = createButton(`.`)
@@ -138,6 +226,15 @@ Reports.style(`padding-right`,`160px`)
 Reports.style(`padding-top`,`50px`)
 Reports.style(`padding-bottom`,`10px`)
     
+    newUser = createButton(`Create Account`)
+newUser.position(width/8,-555)    ;
+    newUser.style(`background`,`transparent`);
+    newUser.style(`color`,`white`);
+    newUser.style(`border`,`0px`);
+    newUser.style(`outline`,`0px`)
+        newUser.style(`font-size`,`18px`)
+    newUser.mousePressed(newU);
+
      talkbox = createInput(``).attribute(`placeholder`,`    Introduction to Ambibot`)
     talkbox.position(width/1.95,-555)
 
@@ -241,6 +338,22 @@ sum.style(`outline`,`0px`)
     end.style(`border`,`0px`)
     end.style(`color`,`white`)
     
+    a2 = createButton(`Sign In`);
+        a2.style(`color`,`white`)
+    a2.style(`font-size`,`18px`)
+       a2.style(`background`,`transparent`);
+    a2.position(200,-555);
+    a2.style(`border`,`0px`);
+        a2.style(`outline`,`0px`);
+
+               a2.mousePressed(back_1)
+
+}
+back_1 = function(){
+    a = 2;
+}
+function newU(){
+    a = 3;
 }
 
 start_sleep = function(){
@@ -263,12 +376,15 @@ waterUpdate = function(){
 function bring(){
     localStorage.speed = 35;
 }
-function registerd(){
-  localStorage.name = input1.value();
-    localStorage.age = input2.value();
-    name = input1.value();
-    age = input2.value();
-     hr = hour();
+function send(){
+    console.log("kf;sd;")
+    UserName = input3.value();
+    email = input4.value();
+    ag = input5.value();
+    pass = input6.value();
+        pass7 = input7.value();
+
+         hr = hour();
     mn = minute();
     sc = second();
        dy = day();
@@ -276,24 +392,78 @@ function registerd(){
     yr = year();
 year =   dy+"-"+mt+"-"+yr
 time =   hr+":"+mn+":"+sc
-    console.log(time)
-    
-      var data ={
+    if(pass === pass7){
+        console.log("You are great")
+    }
+        var data ={
           TIME :time,
-    NAME : name,
-           AGE :age,
+    NAME : UserName,
+           AGE :ag,
+            EMAIL : email,
+            Password: pass,
           DATE : year
   }
-  database.ref(name).push(data,finished);
+  database.ref(UserName).push(data,finished);
   console.log("send called");
+    a=2;
+}
+
+function login(){
+  localStorage.name = input1.value();
+    localStorage.age = input2.value();
+    name = input1.value();
+    age = input2.value();
     
-    console.log("Name: "+localStorage.name)
+
+
+    console.log(time)
+    
+//      var data ={
+//          TIME :time,
+//    NAME : name,
+//           AGE :age,
+//          DATE : year
+//  }
+//  database.ref(name).push(data,finished);
+//  console.log("send called");
+//    if(uN == null){
+//        console.log("dflhsdlfk")
+//    }
+
+//     alert(`You Have Registerd Successfully`)      
+       var ref = database.ref(name);
+ref.on("value", gotData, errData);
+}
+function update(){
+      
+    if(uN==input1.value()){
+        console.log("success")
+    }
+     if(uP==input2.value()){
+        console.log("successful")
+    }
+    if(uN==input1.value()&&uP==input2.value()){
+     console.log("Name: "+localStorage.name)
         console.log("Age: "+localStorage.age)
     localStorage.speed = 34;
  input1.position(width/4,-555);
  input2.position(width/4,-555);
  registerButton.position(width/2.1,-555)
-//     alert(`You Have Registerd Successfully`)                     
+}
+}
+
+function gotData(data){
+  let info = data.val();
+var keys = Object.keys(info)
+var k = keys[0]
+  console.log(keys)
+uN = info[k].NAME;
+    uP = info[k].Password;
+console.log("Name: "+uN+" Pass: "+uP)
+    update();
+}
+function errData(err){
+console.log(err)
 }
 
 function finished(error) {
@@ -364,19 +534,63 @@ rect(width/1.9,height/1.28,width/9,3)
      }
      if(a===2){
              nextButton.position(width/2.1,-555)
-             input1.position(width/4.5,height/2);
-         
-    input2.position(width/4.5,height/1.65);
-fill("gray")
-           noStroke();
-     rectMode(CORNER)
-rect(width/8,height/1.82,width/1.3,1)
-         rect(width/8,height/1.51,width/1.3,1)
-          image(logo,width/5,8,width/1.6,height/2)
-          image(user,width/7,height/2.1,width/16,height/16,20)
-                   image(age,width/7,height/1.7,width/16,height/16)
-             registerButton.position(width/12,height/1.4)
+             input1.position(width/12,height/2.5);
+         background("#313131")
+    input2.position(width/12,height/1.71);
+//          image(logo,width/5,height/16,width/1.6,height/3)
+//          image(user,width/7,height/2.1,width/16,height/16,20)
+//                   image(age,width/7,height/1.7,width/16,height/16)
+             registerButton.position(width/8,height/1.4)
+fill("white");
+         textSize(width/10)
+         textFont("arial")
+         textStyle("bold")
+         text("Hello.", width/14,height/8)
+         text("Welcome Back.", width/14,height/5.15)
+         fill("gray");
+         textSize(width/23)
+         textFont("arial")
+         textStyle("normal")
+         text("Username",width/12,height/2.65);
+                  text("Password",width/12,height/1.78)
+newUser.position(width/3,height/1.2)  
+          input3.position(width/12,-555);
+                  input4.position(width/12,-555);
+         input5.position(width/12,-555);
+         input6.position(width/12,-555);
+         input7.position(width/12,-555);
+         success.position(width/8-555)
+         a2.position(width/20,-555);
 
+     }
+     if(a===3){
+                  background("#313131")
+
+         input1.position(2,-5555);
+                  input2.position(2,-5555);
+newUser.position(width/3,-555)  
+             registerButton.position(width/8,-555)
+         fill("white");
+         textSize(width/10)
+         textFont("arial")
+         textStyle("bold")
+         text("Join Us.", width/14,height/8)
+         input3.position(width/12,height/4);
+                  input4.position(width/12,height/2.65);
+         input5.position(width/12,height/2);
+         input6.position(width/12,height/1.64);
+         input7.position(width/12,height/1.39);
+         success.position(width/8,height/1.2)
+  fill("gray");
+         textSize(width/23)
+         textFont("arial")
+         textStyle("normal")
+         text("Username",width/12,height/4.2);
+         text("Email",width/12,height/2.75);
+         text("Age",width/12,height/2.06);
+         text("Password",width/12,height/1.65);
+         text("Confirm Password",width/12,height/1.4);
+a2.position(width/3,height/1.07);
      }
 }
     if(localStorage.speed==34){
@@ -389,6 +603,8 @@ rect(width/8,height/1.82,width/1.3,1)
             background(dk)
             textSize(width/30);
 //            textStyle("bold");
+            newUser.position(width/3,-555)  
+
             fill("white")
             text(localStorage.name,width/12,height/12)
 Health.style(`padding-left`,`15px`)
